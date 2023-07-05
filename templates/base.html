@@ -29,7 +29,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Головна</a>
+                    <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Головна</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Мій блог</a>
@@ -39,11 +39,9 @@
                       Категорія
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Python</a></li>
-                      <li><a class="dropdown-item" href="#">Scratch</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Pygame</a></li>
-                      <li><a class="dropdown-item" href="#">Turtle</a></li>
+                       {% for categ  in category_list %}
+                         <li><a class="dropdown-item" href="{{url_for('category', id = categ[0])}}">{{categ[1].capitalize()}}</a></li>
+                       {% endfor %} 
                     </ul>
                   </li>
                   
