@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 
 from sql_queries import *
+from config import *
 
 app = Flask(__name__) #створюємо Flask-додаток
+app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route("/")
 @app.route("/index")
@@ -28,7 +30,14 @@ def post(post_id):
 def new_post():
     category_list = get_categorys()
     if request.method == "POST":
-        add_post(request.form['category'], request.form['title'], request.form['text'])
+        try:        
+            image = request.files['image']
+            image.save(PATH_IMG+image.filename)
+            add_post(request.form['category'], request.form['title'], request.form['text'], image.filename)
+            flash("Пост додано!", "alert-success")
+        except:
+            flash("Помилка додавання поста!", "alert-danger")
+
     return render_template("newpost.html", category_list = category_list)
 
 if __name__ == "__main__":

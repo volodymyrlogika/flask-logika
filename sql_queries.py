@@ -75,7 +75,7 @@ def get_categorys():
 def add_post(*data):
     open()
     cursor.execute('''
-    INSERT INTO posts (category_id, title, text) VALUES ((?), (?), (?))''', [data[0], data[1], data[2]] )
+    INSERT INTO posts (category_id, title, text, image) VALUES ((?), (?), (?), (?))''', [data[0], data[1], data[2], data[3]] )
     conn.commit()
     close()
 
